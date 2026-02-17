@@ -2,21 +2,12 @@
   <br/>
   <img src="public/favicon.svg" width="120" height="120" alt="Immersive Noise Monitor Logo" />
   <br/>
-  沉浸式噪音监测
+  沉浸式噪音监测 | Immersive-clock-monitor 
 </h1>
 
 <p align="center">
-  专注于公开沉浸式时钟独特的噪音监测与评分算法
+  此项目用于公开与展示 沉浸式时钟-Immersive Clock 其独特的噪音监测与评分算法
 </p>
-
-<div align="center">
-  <a href="https://github.com/QQHKX/Immersive-clock" target="_blank">
-    <img src="https://img.shields.io/badge/🕐-沉浸式时钟-10B981?style=for-the-badge&logo=github" alt="沉浸式时钟" />
-  </a>
-  <a href="https://clock.qqhkx.com/" target="_blank">
-    <img src="https://img.shields.io/badge/🚀-在线体验-3B82F6?style=for-the-badge" alt="在线体验" />
-  </a>
-</div>
 
 > 沉浸式时钟 [Immersive Clock](https://github.com/QQHKX/Immersive-clock) 的衍生作品。
 
@@ -30,9 +21,7 @@
 
 本项目从 [沉浸式时钟](https://github.com/QQHKX/Immersive-clock) 项目中提取并独立了噪音监测模块，旨在公开其基于心理声学与专注力理论的噪音评分引擎。该算法不仅仅是一个简单的分贝计，而是通过多维度加权扣分制，客观量化环境噪音对学习心流的干扰程度。
 
-> 💡 **推荐体验完整版**：如果您喜欢这个噪音监测功能，强烈推荐体验原版 [沉浸式时钟](https://github.com/QQHKX/Immersive-clock)，它不仅包含本项目的所有噪音监测功能，还集成了时钟、倒计时、秒表、晚自习模式、天气提醒、励志语录、课程表管理等丰富功能，是学习专注的完整解决方案。
->
-> 🌐 **立即在线体验**：[https://clock.qqhkx.com/](https://clock.qqhkx.com/) - 无需安装，打开即用！
+> 🎯 **想要完整体验？** 如果您需要的是一个功能完整的学习专注工具，而不是单独的噪音监测模块，请直接使用 [沉浸式时钟](https://github.com/QQHKX/Immersive-clock)。它集成了噪音监测、时钟、倒计时、秒表、晚自习模式、天气提醒、励志语录、课程表管理等所有功能，为您提供一站式的学习专注解决方案。
 
 ## 技术栈
 
@@ -337,41 +326,6 @@ cnpm run lint
 3. **技术聚焦**：专注于噪音监测的核心技术，便于深入研究
 4. **开源贡献**：为社区提供了一个高质量的噪音监测算法实现参考
 
-> 🎯 **想要完整体验？** 如果您需要的是一个功能完整的学习专注工具，而不是单独的噪音监测模块，请直接使用 [沉浸式时钟](https://github.com/QQHKX/Immersive-clock)。它集成了噪音监测、时钟、倒计时、秒表、晚自习模式、天气提醒、励志语录、课程表管理等所有功能，为您提供一站式的学习专注解决方案。
-
-
 ## 许可证
 
 本项目遵循原 [沉浸式时钟](https://github.com/QQHKX/Immersive-clock) 项目的许可证。
-
----
-
-<div align="center">
-
-## 🕐 推荐体验沉浸式时钟
-
-如果您喜欢这个噪音监测功能，强烈推荐体验原版 **[沉浸式时钟](https://github.com/QQHKX/Immersive-clock)**
-
-### 为什么选择沉浸式时钟？
-
-沉浸式时钟是一个功能完整的专注学习工具，除了包含本项目的所有噪音监测功能外，还提供：
-
-| 功能模块 | 说明 |
-|---------|------|
-| 🕐 **时钟显示** | 精美的全屏时钟，支持多种主题和字体 |
-| ⏱️ **倒计时** | 支持多目标倒计时轮播，适合番茄工作法 |
-| ⏱️ **秒表** | 精确的秒表功能，支持分段计时 |
-| 📚 **晚自习模式** | 专为学习场景设计的专注模式 |
-| 🌤️ **实时天气** | 显示当前天气和分钟级降水预警 |
-| 📊 **噪音走势图** | 可视化噪音变化趋势 |
-| 💬 **励志语录** | 多频道励志语录，激励学习动力 |
-| 📅 **课程表管理** | 支持课程表导入和管理 |
-| 🎨 **背景定制** | 自定义背景和主题 |
-| 📱 **PWA 支持** | 支持离线使用和桌面安装 |
-
-### 立即体验
-
-[![沉浸式时钟](https://img.shields.io/badge/🚀-在线体验-3B82F6?style=for-the-badge)](https://clock.qqhkx.com/)
-[![GitHub](https://img.shields.io/badge/GitHub-仓库-10B981?style=for-the-badge&logo=github)](https://github.com/QQHKX/Immersive-clock)
-
-</div>

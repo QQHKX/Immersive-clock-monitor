@@ -3,7 +3,7 @@ import { noiseService } from './services/noiseService';
 import { RealtimeMonitor } from './components/RealtimeMonitor';
 import { HistoryList } from './components/HistoryList';
 import { NoiseRealtimePoint, NoiseSliceSummary, NoiseStreamStatus, NoiseScoreBreakdown } from './types';
-import { Play, Square, Mic, ShieldAlert, FileBarChart2, Sliders, Github } from 'lucide-react';
+import { Play, Square, Mic, ShieldAlert, FileBarChart2, Sliders, Github, User } from 'lucide-react';
 
 /**
  * 主应用组件
@@ -153,16 +153,13 @@ function App() {
           </div>
           {/* 右侧操作按钮 */}
           <div className="flex items-center gap-4">
-            {/* GitHub 链接 */}
-            <a
-              href="https://github.com/QQHKX"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-zinc-500 hover:text-white transition-colors"
-              title="作者 GitHub"
-            >
-              <Github className="w-4 h-4" />
-            </a>
+            {/* 监测状态指示器 */}
+            {status === "active" && (
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium animate-pulse">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                正在监测
+              </div>
+            )}
             {/* 校准按钮 */}
             <button
               onClick={calibrate}
@@ -172,13 +169,26 @@ function App() {
               <Sliders className="w-3 h-3" />
               校准
             </button>
-            {/* 监测状态指示器 */}
-            {status === "active" && (
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium animate-pulse">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                正在监测
-              </div>
-            )}
+            {/* 当前项目 GitHub 链接 */}
+            <a
+              href="https://github.com/QQHKX/Immersive-clock-monitor"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 hover:text-emerald-400 transition-colors"
+              title="项目 GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
+            {/* 作者 GitHub 链接 */}
+            <a
+              href="https://github.com/QQHKX"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 hover:text-white transition-colors"
+              title="作者 GitHub"
+            >
+              <User className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </header>
