@@ -1,0 +1,7 @@
+{
+  "name": "沉浸式噪音监测",
+  "description": "一款专业级环境噪音监测与评分系统，使用多维惩罚模型评估专注环境。",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
