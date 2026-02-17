@@ -223,22 +223,16 @@ $$ \text{Score} = 100 \times (1 - \text{TotalPenalty}) $$
 
 ```bash
 # 安装依赖
-cnpm install
+npm install
 
 # 启动开发服务器
-cnpm run dev
+npm run dev
 
 # 构建生产版本
-cnpm run build
+npm run build
 
 # 预览生产构建
-cnpm run preview
-
-# 类型检查
-cnpm run type-check
-
-# 代码检查
-cnpm run lint
+npm run preview
 ```
 
 ### 开发规范
@@ -328,4 +322,15 @@ cnpm run lint
 
 ## 许可证
 
-本项目遵循原 [沉浸式时钟](https://github.com/QQHKX/Immersive-clock) 项目的许可证。
+本项目采用 [GNU General Public License v3.0](LICENSE) 开源许可证。
+
+### 许可证摘要
+
+- ✅ 您可以自由使用、复制、修改和分发本软件
+- ✅ 您可以基于本项目创建衍生作品
+- ✅ 您可以商业使用本项目
+- ⚠️ 任何修改后的版本必须同样采用 GPLv3 许可证
+- ⚠️ 您必须向用户提供源代码
+- ⚠️ 本软件按"原样"提供，不提供任何担保
+
+完整许可证文本请参阅 [LICENSE](LICENSE) 文件。
