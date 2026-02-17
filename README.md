@@ -14,13 +14,7 @@
 ## 📊 界面预览
 
 <div align="center">
-  <img src="docs/demo/noise-trend.jpeg" width="80%" alt="噪音走势图" />
-  <p>实时噪音走势与评分分析</p>
-</div>
-
-<div align="center">
-  <img src="docs/demo/high-rate-sampling.jpeg" width="45%" alt="高帧率采样" />
-  <img src="docs/demo/report.jpeg" width="45%" alt="自习报告" />
+  <img src="docs/demo/main-preview.png" width="100%" alt="沉浸式噪音监测主界面" />
 </div>
 
 ## 项目简介
@@ -51,54 +45,57 @@
 
 ## 技术架构
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        用户界面层                                  │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐          │
-│  │ 实时监控组件  │  │ 噪音报告弹窗  │  │ 噪音历史列表  │          │
-│  └──────────────┘  └──────────────┘  └──────────────┘          │
-└─────────────────────────────────────────────────────────────────┘
-                              ↑
-                              │ 订阅/发布
-                              ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                        流服务层                                   │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │  噪音流服务 - 订阅管理、生命周期控制、设置热更新          │   │
-│  └──────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                              ↑
-                              │ 帧数据流
-                              ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                        数据聚合层                                 │
-│  ┌──────────────────┐  ┌────────────────────────────────────┐  │
-│  │ 噪音帧处理器      │  │ 噪音切片聚合器                      │  │
-│  │ - RMS/dBFS 计算   │  │ - 切片聚合、统计指标、评分计算      │  │
-│  │ - 50ms/帧         │  │ - 30秒/切片                         │  │
-│  └──────────────────┘  └────────────────────────────────────┘  │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │ 实时环形缓冲区 - 保留固定时长的实时数据                    │   │
-│  └──────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                              ↑
-                              │ 音频流
-                              ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                        数据采集层                                 │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │ 麦克风采集 - Web Audio API、滤波器、AnalyserNode         │   │
-│  └──────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                              ↑
-                              │ 物理音频
-                              ↓
-┌─────────────────────────────────────────────────────────────────┐
-│                        数据存储层                                 │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │ 切片存储 - localStorage、时间清理、容量限制                │   │
-│  └──────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TD
+    %% 样式定义
+    classDef layer fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef component fill:#fff,stroke:#666,stroke-width:1px;
+
+    subgraph UI_Layer [用户界面层]
+        direction TB
+        Monitor[实时监控组件]:::component
+        Report[噪音报告弹窗]:::component
+        History[噪音历史列表]:::component
+    end
+    class UI_Layer layer
+
+    subgraph Service_Layer [流服务层]
+        NoiseService[噪音流服务<br/>订阅管理 / 生命周期控制 / 设置热更新]:::component
+    end
+    class Service_Layer layer
+
+    subgraph Aggregation_Layer [数据聚合层]
+        direction TB
+        FrameProcessor[噪音帧处理器<br/>RMS/dBFS 计算 / 50ms每帧]:::component
+        SliceAggregator[噪音切片聚合器<br/>切片聚合 / 评分计算 / 30秒每切片]:::component
+        RingBuffer[实时环形缓冲区<br/>保留固定时长的实时数据]:::component
+    end
+    class Aggregation_Layer layer
+
+    subgraph Acquisition_Layer [数据采集层]
+        MicCapture[麦克风采集<br/>Web Audio API / 滤波器 / AnalyserNode]:::component
+    end
+    class Acquisition_Layer layer
+
+    subgraph Storage_Layer [数据存储层]
+        LocalStorage[切片存储<br/>localStorage / 时间清理 / 容量限制]:::component
+    end
+    class Storage_Layer layer
+
+    %% 数据流向
+    MicCapture ==>|音频流| FrameProcessor
+    FrameProcessor --> RingBuffer
+    FrameProcessor --> SliceAggregator
+    SliceAggregator ==>|持久化| LocalStorage
+    
+    FrameProcessor -->|帧数据流| NoiseService
+    SliceAggregator -->|切片数据| NoiseService
+    
+    NoiseService ==>|发布 / 订阅| Monitor
+    NoiseService ==>|数据通知| Report
+    NoiseService ==>|数据加载| History
+    
+    LocalStorage -.->|历史回溯| History
 ```
 
 ## 快速开始
@@ -121,18 +118,16 @@ cnpm run dev
 cnpm run build
 ```
 
-## 技术栈对比
+## 技术栈
 
-| 技术组件 | 沉浸式时钟 | 本项目 | 说明 |
-|---------|------------|--------|------|
-| 前端框架 | React | React 19 | 本项目使用最新版本 |
-| 构建工具 | Vite | Vite 6 | 本项目使用最新版本 |
-| 类型系统 | TypeScript | TypeScript 5.8 | 本项目使用最新版本 |
-| 图表库 | Recharts | Recharts 3 | 本项目使用最新版本 |
-| 音频处理 | Web Audio API | Web Audio API | 完全一致 |
-| 数据存储 | localStorage | localStorage | 完全一致 |
-| PWA | ✅ | ❌ | 本项目不包含 PWA 功能 |
-| 天气 API | 和风天气 | ❌ | 本项目不包含天气功能 |
+| 技术组件 | 版本/方案 |
+|---------|----------|
+| **前端框架** | React 19 |
+| **构建工具** | Vite 6 |
+| **类型系统** | TypeScript 5.8 |
+| **图表库** | Recharts 3 |
+| **音频处理** | Web Audio API |
+| **数据存储** | localStorage |
 
 ## 核心算法说明
 
