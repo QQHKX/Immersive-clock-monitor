@@ -112,9 +112,9 @@ cnpm run build
 
 ```mermaid
 graph TD
-    %% 样式定义
-    classDef layer fill:#f9f9f9,stroke:#333,stroke-width:1px;
-    classDef component fill:#fff,stroke:#666,stroke-width:1px;
+    %% 样式定义 - 适配深色模式
+    classDef layer fill:#1a1a1a,stroke:#444,stroke-width:1px,color:#eee;
+    classDef component fill:#2a2a2a,stroke:#666,stroke-width:1px,color:#fff;
 
     subgraph UI_Layer [用户界面层]
         direction TB
