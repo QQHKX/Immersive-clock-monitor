@@ -5,10 +5,6 @@
   沉浸式噪音监测 | Immersive-clock-monitor 
 </h1>
 
-<p align="center">
-  此项目用于公开与展示 沉浸式时钟-Immersive Clock 其独特的噪音监测与评分算法
-</p>
-
 > 沉浸式时钟 [Immersive Clock](https://github.com/QQHKX/Immersive-clock) 的衍生作品。
 
 ## 界面预览
