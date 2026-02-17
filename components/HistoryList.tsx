@@ -49,7 +49,27 @@ export const HistoryList: React.FC<HistoryListProps> = ({ slices, onClear }) => 
     return (
       <div className="text-center py-12 text-zinc-500 bg-zinc-900 rounded-xl border border-zinc-800">
         <Activity className="w-12 h-12 mx-auto mb-3 opacity-20" />
-        <p>暂无历史记录。开始监测以生成报告。</p>
+        <p className="mb-4">暂无历史记录。开始监测以生成报告。</p>
+        <div className="flex items-center justify-center gap-4">
+          <a
+            href="https://clock.qqhkx.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm transition-colors"
+          >
+            <span>🌐</span>
+            <span>在线体验沉浸式时钟</span>
+          </a>
+          <a
+            href="https://github.com/QQHKX/Immersive-clock"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 text-sm transition-colors"
+          >
+            <span>🕐</span>
+            <span>GitHub 仓库</span>
+          </a>
+        </div>
       </div>
     );
   }

@@ -3,7 +3,7 @@ import { noiseService } from './services/noiseService';
 import { RealtimeMonitor } from './components/RealtimeMonitor';
 import { HistoryList } from './components/HistoryList';
 import { NoiseRealtimePoint, NoiseSliceSummary, NoiseStreamStatus, NoiseScoreBreakdown } from './types';
-import { Play, Square, Mic, ShieldAlert, FileBarChart2, Sliders } from 'lucide-react';
+import { Play, Square, Mic, ShieldAlert, FileBarChart2, Sliders, Github } from 'lucide-react';
 
 /**
  * 主应用组件
@@ -139,10 +139,30 @@ function App() {
             <div className="w-8 h-8 rounded bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20">
               <Mic className="w-5 h-5" />
             </div>
-            <span className="font-bold tracking-tight text-lg text-white">沉浸式<span className="text-zinc-500 font-light">噪音监测</span></span>
+            <div className="flex flex-col justify-center">
+              <span className="font-bold tracking-tight text-lg text-white leading-none">沉浸式<span className="text-zinc-500 font-light">噪音监测</span></span>
+              <a
+                href="https://github.com/QQHKX/Immersive-clock"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] text-zinc-500 hover:text-emerald-400 transition-colors font-medium tracking-wide mt-0.5 w-fit"
+              >
+                沉浸式时钟衍生项目
+              </a>
+            </div>
           </div>
           {/* 右侧操作按钮 */}
           <div className="flex items-center gap-4">
+            {/* GitHub 链接 */}
+            <a
+              href="https://github.com/QQHKX"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-500 hover:text-white transition-colors"
+              title="作者 GitHub"
+            >
+              <Github className="w-4 h-4" />
+            </a>
             {/* 校准按钮 */}
             <button
               onClick={calibrate}
@@ -231,6 +251,37 @@ function App() {
         {/* ==================== 历史记录部分 ==================== */}
         <section>
           <HistoryList slices={history} onClear={clearHistory} />
+        </section>
+
+        {/* ==================== 沉浸式时钟推荐 ==================== */}
+        <section className="bg-gradient-to-r from-emerald-500/5 to-teal-500/5 border border-emerald-500/20 rounded-xl p-6">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <div className="text-4xl">🕐</div>
+            <div className="flex-1 text-center md:text-left">
+              <h3 className="text-lg font-semibold text-emerald-400 mb-1">推荐体验沉浸式时钟</h3>
+              <p className="text-sm text-zinc-400">
+                如果您喜欢这个噪音监测功能，强烈推荐体验原版沉浸式时钟。它不仅包含所有噪音监测功能，还集成了时钟、倒计时、秒表、晚自习模式、天气提醒、励志语录、课程表管理等丰富功能，是学习专注的完整解决方案。
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <a
+                href="https://clock.qqhkx.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2.5 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap"
+              >
+                <span>🌐 在线体验</span>
+              </a>
+              <a
+                href="https://github.com/QQHKX/Immersive-clock"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg font-medium transition-colors flex items-center gap-2 whitespace-nowrap"
+              >
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
         </section>
 
       </main>
