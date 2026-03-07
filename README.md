@@ -94,9 +94,9 @@ cnpm run build
 
 | 维度 | 权重 | 指标 | 满扣分条件 |
 |------|------|------|-----------|
-| **持续噪音** | 40% | p50Dbfs | 中位数超过阈值 6 dBFS |
+| **持续噪音** | 25% | p50Dbfs | 中位数超过阈值 6 dBFS |
 | **超阈时长** | 30% | overRatioDbfs | 超阈时间占比 30% |
-| **打断频次** | 30% | segmentCount | 6 次/分钟 |
+| **打断频次** | 45% | segmentCount | 6 次/分钟 |
 
 ### 评分与校准分离
 
@@ -177,7 +177,7 @@ $$ \text{dBFS} = 20 \times \log_{10}(\text{RMS}) $$
 
 ### 评分公式
 
-$$ \text{TotalPenalty} = 0.40 \times P_{\text{sustained}} + 0.30 \times P_{\text{time}} + 0.30 \times P_{\text{segment}} $$
+$$ \text{TotalPenalty} = 0.25 \times P_{\text{sustained}} + 0.30 \times P_{\text{time}} + 0.45 \times P_{\text{segment}} $$
 
 $$ \text{Score} = 100 \times (1 - \text{TotalPenalty}) $$
 
@@ -301,9 +301,9 @@ npm run preview
 | dBFS 转换 | ✅ | ✅ | 已实现 |
 | 能量平均（线性域） | ✅ | ✅ | 已实现 |
 | 线性域分位数 | ✅ | ✅ | 已实现 |
-| 持续噪音惩罚（40%） | ✅ | ✅ | 已实现 |
+| 持续噪音惩罚（25%） | ✅ | ✅ | 已实现 |
 | 超阈时长惩罚（30%） | ✅ | ✅ | 已实现 |
-| 打断频次惩罚（30%） | ✅ | ✅ | 已实现 |
+| 打断频次惩罚（45%） | ✅ | ✅ | 已实现 |
 | 智能事件段合并（500ms） | ✅ | ✅ | 已实现 |
 | 评分与校准分离 | ✅ | ✅ | 已实现 |
 

@@ -12,18 +12,18 @@ import { clamp01 } from "../services/noiseMath";
  * 根据技术规格计算噪音评分，采用三维度加权扣分制
  * 
  * 惩罚模型 (Penalty Model):
- * 1. 持续噪音 (Sustained Noise - p50): 权重 40%
+ * 1. 持续噪音 (Sustained Noise - p50): 权重 25%
  *    - 如果中位数值 (p50) 超过阈值 6dB，则该项扣满分
  *    - 反映环境的底噪水平，持续的风扇声或交谈声会拉低分数
  * 2. 超过阈值时长比例 (Time Penalty): 权重 30%
  *    - 如果超过 30% 的时间高于阈值，则该项扣满分
  *    - 反映环境的"纯净度"，即使是 0.1 秒的尖叫也会被精确计入
- * 3. 干扰频率 (Interruption Frequency - Segments): 权重 30%
+ * 3. 干扰频率 (Interruption Frequency - Segments): 权重 45%
  *    - 如果每分钟超过 6 次干扰事件，则该项扣满分
  *    - 反映环境的干扰频率，频繁的打断比连续的噪音更易打断心流
  * 
  * 最终得分公式：Score = 100 × (1 - TotalPenalty)
- * 其中 TotalPenalty = 0.4 × P_sustained + 0.3 × P_time + 0.3 × P_segment
+ * 其中 TotalPenalty = 0.25 × P_sustained + 0.3 × P_time + 0.45 × P_segment
  * 
  * @param raw 原始统计数据（基于 dBFS）
  * @param durationMs 切片持续时间（毫秒）
@@ -34,7 +34,7 @@ export function computeNoiseSliceScore(
   durationMs: number
 ): { score: number; scoreDetail: NoiseScoreBreakdown } {
   
-  // ==================== 1. 持续噪音惩罚 (40%) ====================
+  // ==================== 1. 持续噪音惩罚 (25%) ====================
   // 
   // 计算中位数与阈值的差值，如果超过 6dB 则该项扣满分
   // 中位数反映环境的底噪水平，剔除突发噪音的影响
@@ -51,7 +51,7 @@ export function computeNoiseSliceScore(
   // 公式：P_time = clamp01(overRatioDbfs / 0.3)
   const timePenalty = clamp01(raw.overRatioDbfs / 0.3);
 
-  // ==================== 3. 干扰频率惩罚 (30%) ====================
+  // ==================== 3. 干扰频率惩罚 (45%) ====================
   // 
   // 计算每分钟的噪音事件数，如果超过 6 次/分钟则该项扣满分
   // 反映环境的干扰频率，频繁的打断比连续的噪音更易打断心流
@@ -68,8 +68,8 @@ export function computeNoiseSliceScore(
   // ==================== 加权总和 ====================
   // 
   // 将三个维度的惩罚系数按权重相加
-  // TotalPenalty = 0.4 × P_sustained + 0.3 × P_time + 0.3 × P_segment
-  const totalPenalty = (0.4 * sustainedPenalty) + (0.3 * timePenalty) + (0.3 * segmentPenalty);
+  // TotalPenalty = 0.25 × P_sustained + 0.3 × P_time + 0.45 × P_segment
+  const totalPenalty = (0.25 * sustainedPenalty) + (0.3 * timePenalty) + (0.45 * segmentPenalty);
   
   // ==================== 最终得分 ====================
   // 

@@ -41,9 +41,9 @@ export interface NoiseSliceDisplayStats {
  * 包含评分的详细计算过程和各项惩罚系数
  */
 export interface NoiseScoreBreakdown {
-  sustainedPenalty: number;      // 持续噪音惩罚（基于 p50），权重 40%，范围 0-1
+  sustainedPenalty: number;      // 持续噪音惩罚（基于 p50），权重 25%，范围 0-1
   timePenalty: number;           // 时长占比惩罚（超过阈值的时间），权重 30%，范围 0-1
-  segmentPenalty: number;        // 频繁中断惩罚（噪音事件次数），权重 30%，范围 0-1
+  segmentPenalty: number;        // 频繁中断惩罚（噪音事件次数），权重 45%，范围 0-1
   thresholdsUsed: {
     scoreThresholdDbfs: number;      // 使用的评分阈值（dBFS），默认 -50 dBFS
     segmentMergeGapMs: number;       // 使用的合并间隔（毫秒），默认 500ms

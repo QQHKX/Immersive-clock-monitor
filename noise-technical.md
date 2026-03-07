@@ -362,22 +362,22 @@ $$ \text{displayDb} = 20 \times \log_{10}\left(\frac{\text{rms}}{10^{-3}}\right)
 ### 5.2 评分引擎
 
 #### 5.2.1 三维度评分模型
-
-评分系统从三个维度对噪音进行评估：
-
-| 维度 | 权重 | 指标 | 满扣分条件 |
-|------|------|------|-----------|
-| **持续噪音** | 40% | p50Dbfs | 中位数超过阈值 6 dBFS |
-| **超阈时长** | 30% | overRatioDbfs | 超阈时间占比 30% |
-| **打断频次** | 30% | segmentCount | 6 次/分钟 |
-
-#### 5.2.2 评分公式
-
-**总惩罚系数：**
-$$ \text{TotalPenalty} = 0.40 \times P_{\text{sustained}} + 0.30 \times P_{\text{time}} + 0.30 \times P_{\text{segment}} $$
-
-**最终得分：**
-$$ \text{Score} = 100 \times (1 - \text{TotalPenalty}) $$
+ 
+ 评分系统从三个维度对噪音进行评估：
+ 
+ | 维度 | 权重 | 指标 | 满扣分条件 |
+ |------|------|------|-----------|
+ | **持续噪音** | 25% | p50Dbfs | 中位数超过阈值 6 dBFS |
+ | **超阈时长** | 30% | overRatioDbfs | 超阈时间占比 30% |
+ | **打断频次** | 45% | segmentCount | 6 次/分钟 |
+ 
+ #### 5.2.2 评分公式
+ 
+ **总惩罚系数：**
+ $$ \text{TotalPenalty} = 0.25 \times P_{\text{sustained}} + 0.30 \times P_{\text{time}} + 0.45 \times P_{\text{segment}} $$
+ 
+ **最终得分：**
+ $$ \text{Score} = 100 \times (1 - \text{TotalPenalty}) $$
 
 #### 5.2.3 惩罚系数计算
 
@@ -404,9 +404,9 @@ $$ P_{\text{segment}} = \text{clamp}_{[0,1]}\left(\frac{\text{segmentCount} / \t
 
 #### 5.2.4 权重解读
 
-- **持续噪音 (40%)**：持续底噪仍会明显拉低分数
+- **持续噪音 (25%)**：降低了对持续底噪的敏感度
 - **超阈时长 (30%)**：只要大部分时间安静，偶尔的噪音仍可被容忍
-- **打断频次 (30%)**：强调"被频繁打断"对心流的破坏，提升对碎片化干扰的惩罚力度
+- **打断频次 (45%)**：大幅提升权重，极度强调"被频繁打断"对心流的破坏，这是最核心的扣分项
 
 #### 5.2.5 边界条件处理
 
@@ -430,8 +430,8 @@ sustainedPenalty = clamp01((-60 - (-50)) / 6) = clamp01(-10/6) = 0
 timePenalty = clamp01(0.05 / 0.3) = 0.167
 segmentPenalty = clamp01((1/0.5) / 6) = clamp01(2/6) = 0.333
 
-TotalPenalty = 0.4×0 + 0.3×0.167 + 0.3×0.333 = 0.15
-Score = 100 × (1 - 0.15) = 85 分
+TotalPenalty = 0.25×0 + 0.3×0.167 + 0.45×0.333 = 0.20
+Score = 100 × (1 - 0.20) = 80 分
 ```
 
 **场景 2：嘈杂环境**
@@ -444,8 +444,8 @@ sustainedPenalty = clamp01((-45 - (-50)) / 6) = clamp01(5/6) = 0.833
 timePenalty = clamp01(0.40 / 0.3) = 1.0
 segmentPenalty = clamp01((8/0.5) / 6) = clamp01(16/6) = 1.0
 
-TotalPenalty = 0.4×0.833 + 0.3×1.0 + 0.3×1.0 = 0.933
-Score = 100 × (1 - 0.933) = 6.7 分
+TotalPenalty = 0.25×0.833 + 0.3×1.0 + 0.45×1.0 = 0.958
+Score = 100 × (1 - 0.958) = 4.2 分
 ```
 
 ---
