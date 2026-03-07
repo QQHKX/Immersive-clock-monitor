@@ -1,6 +1,7 @@
 {
   "name": "沉浸式噪音监测",
   "private": true,
+  "homepage": "https://clock-monitor.qqhkx.com/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

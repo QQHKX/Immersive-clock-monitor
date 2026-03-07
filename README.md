@@ -6,6 +6,8 @@
 </h1>
 
 > 沉浸式时钟 [Immersive Clock](https://github.com/QQHKX/Immersive-clock) 的衍生作品。
+>
+> 🌐 **在线体验**：[https://clock-monitor.qqhkx.com/](https://clock-monitor.qqhkx.com/)
 
 ## 界面预览
 
